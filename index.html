@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Linker Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    /* Tailwind CSS compiled output (subset of utilities and base styles) */
+    *, ::before, ::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100dvh;
+      background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .flex {
+      display: flex;
+    }
+    .flex-col {
+      flex-direction: column;
+    }
+    .items-center {
+      align-items: center;
+    }
+    .justify-between {
+      justify-content: space-between;
+    }
+    .gap-1 {
+      gap: 0.25rem;
+    }
+    .w-full {
+      width: 100%;
+    }
+    .min-w-\[90vw\] {
+      min-width: 90vw;
+    }
+    .max-w-\[360px\] {
+      max-width: 360px;
+    }
+    .p-8 {
+      padding: 2rem;
+    }
+    .p-3 {
+      padding: 0.75rem;
+    }
+    .m-2 {
+      margin: 0.5rem 0;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .text-xl {
+      font-size: 1.25rem;
+    }
+    .text-lg {
+      font-size: 1.125rem;
+    }
+    .text-base {
+      font-size: 1rem;
+    }
+    .text-sm {
+      font-size: 0.875rem;
+    }
+    .font-bold {
+      font-weight: 700;
+    }
+    .italic {
+      font-style: italic;
+    }
+    .text-white {
+      color: #f5f5f5;
+    }
+    .text-gray-300 {
+      color: #e5e4e2;
+    }
+    .text-yellow-400 {
+      color: #ffd700;
+    }
+    .text-blue-200 {
+      color: #b9f2ff;
+    }
+    .bg-transparent {
+      background-color: transparent;
+    }
+    .border {
+      border-width: 1px;
+    }
+    .border-yellow-400\/30 {
+      border-color: rgba(255, 215, 0, 0.3);
+    }
+    .rounded-lg {
+      border-radius: 16px;
+    }
+    .rounded-md {
+      border-radius: 8px;
+    }
+    .shadow-lg {
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), inset 0 0 20px rgba(255, 0, 0, 0.2);
+    }
+    .shadow-md {
+      box-shadow: 0 0 15px rgba(155, 148, 148, 0.5);
+    }
+    .transition {
+      transition-property: transform, box-shadow;
+      transition-duration: 300ms;
+      transition-timing-function: ease;
+    }
+    .hover\:scale-105:hover {
+      transform: scale(1.05);
+    }
+    .hover\:shadow-md:hover {
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    }
+    /* Mobile-specific styles (iPhone 16 Pro Max) */
+    @media (max-width: 430px) {
+      .max-w-\[360px\] {
+        max-width: 92vw;
+      }
+      .p-8 {
+        padding: 1.5rem;
+      }
+      .text-lg {
+        font-size: 1rem;
+      }
+      .text-base {
+        font-size: 0.9rem;
+      }
+      .text-sm {
+        font-size: 0.8rem;
+      }
+      .p-3 {
+        padding: 0.5rem;
+      }
+    }
+    /* Laptop-specific styles (MacBook) */
+    @media (min-width: 768px) {
+      .max-w-\[360px\] {
+        max-width: 360px;
+      }
+      .p-8 {
+        padding: 2.5rem;
+      }
+      .text-xl {
+        font-size: 1.5rem;
+      }
+      .text-base {
+        font-size: 1.125rem;
+      }
+      .avatar {
+        width: 120px;
+        height: 120px;
+      }
+      .icon-container {
+        width: 1.75rem;
+        height: 1.75rem;
+      }
+      .link-button .icon-container i {
+        font-size: 1.125rem;
+      }
+    }
+
+    /* Custom styles for linker card */
+    .card {
+      background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(10, 10, 10, 0.95));
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+      animation: float 8s infinite ease-in-out;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to bottom right, transparent 45%, rgba(255, 215, 0, 0.1) 50%, transparent 55%);
+      transform: rotate(30deg);
+      animation: shine 6s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: rotate(30deg) translate(-30%, -30%); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: rotate(30deg) translate(30%, 30%); opacity: 0; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #ffd700;
+      box-shadow: 0 0 15px rgba(183, 110, 121, 0.6);
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .name {
+      font-family: 'Playfair Display', serif;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    }
+
+    .title {
+      opacity: 0.8;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Icon styles */
+    .icon {
+      font-size: 2rem;
+      color: #ffd700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    /* Icon container for consistent alignment */
+    .icon-container {
+      width: 1.5rem;
+      height: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .link-button {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+
+    /* Diamond-themed button */
+    .link-button.diamond {
+      background: linear-gradient(145deg, rgba(185, 242, 255, 0.2), rgba(185, 242, 255, 0.05));
+      border: 1px solid rgba(185, 242, 255, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .link-button.diamond::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to bottom right, transparent 45%, rgba(185, 242, 255, 0.3) 50%, transparent 55%);
+      transform: rotate(30deg);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .link-button.diamond:hover::before {
+      opacity: 1;
+      animation: shine 1s;
+    }
+    .link-button.diamond .icon-container i {
+      color: #b9f2ff;
+      font-size: 1rem;
+    }
+    .link-button.diamond:hover {
+      box-shadow: 0 0 20px rgba(185, 242, 255, 0.6);
+      transform: scale(1.05);
+    }
+    .link-button.diamond:hover .icon-container i {
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(185, 242, 255, 0.8);
+    }
+
+    /* Ruby-themed button */
+    .link-button.ruby {
+      background: linear-gradient(145deg, rgba(224, 17, 95, 0.2), rgba(224, 17, 95, 0.05));
+      border: 1px solid rgba(224, 17, 95, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .link-button.ruby::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to bottom right, transparent 45%, rgba(224, 17, 95, 0.3) 50%, transparent 55%);
+      transform: rotate(30deg);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .link-button.ruby:hover::before {
+      opacity: 1;
+      animation: shine 1s;
+    }
+    .link-button.ruby .icon-container i {
+      color: #e0115f;
+      font-size: 1rem;
+    }
+    .link-button.ruby:hover {
+      box-shadow: 0 0 20px rgba(224, 17, 95, 0.6);
+      transform: scale(1.05);
+    }
+    .link-button.ruby:hover .icon-container i {
+      color: #ff4d7d;
+      text-shadow: 0 0 10px rgba(224, 17, 95, 0.8);
+    }
+
+    /* Gold-themed button */
+    .link-button.gold {
+      background: linear-gradient(145deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.05));
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .link-button.gold::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to bottom right, transparent 45%, rgba(255, 215, 0, 0.3) 50%, transparent 55%);
+      transform: rotate(30deg);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .link-button.gold:hover::before {
+      opacity: 1;
+      animation: shine 1s;
+    }
+    .link-button.gold .icon-container i {
+      color: #ffd700;
+      font-size: 1rem;
+    }
+    .link-button.gold:hover {
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+      transform: scale(1.05);
+    }
+    .link-button.gold:hover .icon-container i {
+      color: #fffacd;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    }
+
+    /* Particle effect */
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+    }
+    .particle.diamond {
+      background: #b9f2ff;
+      filter: drop-shadow(0 0 5px #b9f2ff);
+    }
+    .particle.ruby {
+      background: #e0115f;
+      filter: drop-shadow(0 0 5px #e0115f);
+    }
+    .particle.gold {
+      background: #ffd700;
+      filter: drop-shadow(0 0 5px #ffd700);
+    }
+
+    @media (max-width: 430px) {
+      .avatar {
+        width: 80px;
+        height: 80px;
+      }
+      .icon {
+        font-size: 1.5rem;
+      }
+      .icon-container {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+      .link-button .icon-container i {
+        font-size: 0.9rem;
+      }
+      .particle {
+        width: 4px;
+        height: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card w-full min-w-[10vw] max-w-[360px] p-8 text-center shadow-lg rounded-lg border border-yellow-400/30 flex-col items-center">
+    <div class="avatar">
+      <img src="https://cdn.aryanaryal.com.np/626c6f672d617279616e/70686f746f73/6c6f676f73/black-logo.png" alt="Profile" loading="lazy" decoding="async">
+    </div>
+   
+    <h1 class="name text-xl font-bold text-yellow-400">Aryan Aryal</h1>
+    
+    <div class="links">
+      <a href="https://aryanaryal.com.np" target="_blank" rel="noopener noreferrer" class="link-button diamond flex items-center justify-between gap-1 p-3 m-2 text-base text-white border rounded-md transition">
+        <span class="icon-container"><i class="fas fa-link"></i></span> Portfolio
+      </a>
+      <a href="https://blog.aryanaryal.com" target="_blank" rel="noopener noreferrer" class="link-button ruby flex items-center justify-between gap-1 p-3 m-2 text-base text-white border rounded-md transition">
+        <span class="icon-container"><i class="fas fa-blog"></i></span> Blog
+      </a>
+      <a href="https://pwd.aryanaryal.com" target="_blank" rel="noopener noreferrer" class="link-button gold flex items-center justify-between gap-1 p-3 m-2 text-base text-white border rounded-md transition">
+        <span class="icon-container"><i class="fas fa-lock"></i></span> Password Manager
+      </a>
+      <a href="https://aaryan.com.np" target="_blank" rel="noopener noreferrer" class="link-button diamond flex items-center justify-between gap-1 p-3 m-2 text-base text-white border rounded-md transition">
+        <span class="icon-container"><i class="fas fa-user"></i></span> Personal Site
+      </a>
+      <a href="https://resume.aaryan.com.np" target="_blank" rel="noopener noreferrer" class="link-button ruby flex items-center justify-between gap-1 p-3 m-2 text-base text-white border rounded-md transition">
+        <span class="icon-container"><i class="fas fa-file"></i></span> Resume
+      </a>
+      <a href="https://card.aaryan.com.np" target="_blank" rel="noopener noreferrer" class="link-button gold flex items-center justify-between gap-1 p-3 m-2 text-base text-white border rounded-md transition">
+        <span class="icon-container"><i class="fas fa-id-card"></i></span> Digital Card
+      </a>
+    </div>
+  </div>
+
+  <script>
+    'use strict';
+
+    // Create particles for button clicks
+    const createParticles = (x, y, theme, count = 6) => {
+      const particleCount = window.innerWidth > 768 ? 8 : 4;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = `particle ${theme}`;
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+        particle.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+        particle.style.opacity = '0.8';
+        document.body.appendChild(particle);
+
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = 1 + Math.random() * 1.5;
+        const lifetime = 600 + Math.random() * 600;
+        const startTime = Date.now();
+
+        const animateParticle = () => {
+          const elapsed = Date.now() - startTime;
+          const progress = elapsed / lifetime;
+          if (progress >= 1) {
+            particle.remove();
+            return;
+          }
+          const currentX = x + Math.cos(angle) * velocity * elapsed * 0.04;
+          const currentY = y + Math.sin(angle) * velocity * elapsed * 0.04 - (elapsed * 0.04 * 0.5);
+          particle.style.left = `${currentX}px`;
+          particle.style.top = `${currentY}px`;
+          particle.style.opacity = `${0.8 * (1 - progress)}`;
+          requestAnimationFrame(animateParticle);
+        };
+        requestAnimationFrame(animateParticle);
+      }
+    };
+
+    // Add click animation and particles for buttons
+    const buttons = document.querySelectorAll('.link-button');
+    buttons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const rect = button.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const theme = button.classList.contains('diamond') ? 'diamond' :
+                      button.classList.contains('ruby') ? 'ruby' : 'gold';
+        createParticles(centerX, centerY, theme);
+        button.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          button.style.transform = 'scale(1)';
+          window.open(button.href, '_blank');
+        }, 100);
+      });
+    });
+  </script>
+</body>
+</html>
